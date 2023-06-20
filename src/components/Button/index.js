@@ -16,6 +16,7 @@ function Button({
     outline,
     disabled,
     rounded,
+    menu,
 
     // Button Sizes
     small,
@@ -61,12 +62,14 @@ function Button({
 
     // Classes:
     const classes = cx('wrapper', {
+        // [className]: className,
         normal,
         iconic,
         primary, // enhanced object literal... Khi prop Primary này đc truyền vào, thì classes sẽ add thêm con className = 'primary' này vào button (... vào thằng Comp ấy.)
         outline, // Y chang primary.
         disabled,
         rounded,
+        menu,
 
         small,
         large,
@@ -75,7 +78,9 @@ function Button({
 
     return (
         <Comp className={classes} {...props}>
+            {/* {leftIcon && <span className={cx('icon')}>{leftIcon}</span>} */}
             <span>{children}</span>
+            {/* {rightIcon && <span className={cx('icon')}>{rightIcon}</span>} */}
         </Comp>
     );
 }

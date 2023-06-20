@@ -22,12 +22,38 @@ import {
     faMagnifyingGlass,
     faEllipsisVertical,
     faPlus,
+    faEarthAmericas,
+    faCircleQuestion,
+    faKeyboard,
+    faMoon,
 } from '@fortawesome/free-solid-svg-icons';
+import Menu from '~/components/Popper/Menu';
 
 const cx = classNames.bind(styles);
 // Thằng classNames.bind này sẽ giúp bind cái styles này vào, rồi nó sẽ trả ra 1 function tên là cx.
 // Thằng cx sẽ cho phép bạn viết classname theo kiểu này: "post-item" thay vì phải camelCase như này: "postItem" ==> nó tiện hơn á!
 // Khi viết classname cso dùng cx thì viết như thế này: className = { cx( post-item ) }
+
+const MENU_ITEMS = [
+    {
+        icon: <FontAwesomeIcon icon={faEarthAmericas} />,
+        title: 'English',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faCircleQuestion} />,
+        title: 'Feedback and help',
+        to: '/feedback',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faKeyboard} />,
+        title: 'Keyboard shortcut',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faMoon} />,
+        title: 'Dark mode',
+        button: 'div...',
+    },
+];
 
 console.log(images.logo);
 
@@ -87,9 +113,12 @@ function Header() {
                         <span>Upload</span>
                     </Button>
                     <Button primary>Log in</Button>
-                    <Button iconic iconSize_one>
-                        <FontAwesomeIcon icon={faEllipsisVertical} />
-                    </Button>
+
+                    <Menu items={MENU_ITEMS}>
+                        <button className={cx('more-btn')}>
+                            <FontAwesomeIcon icon={faEllipsisVertical} />
+                        </button>
+                    </Menu>
                 </div>
             </div>
         </header>

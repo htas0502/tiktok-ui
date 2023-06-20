@@ -119,3 +119,12 @@
     display: flex;
     align-items: center;
 }
+
+.more-btn {
+    min-width: 28px;
+    min-height: 20px;
+    font-size: 20px;
+    margin-left: 16px;
+    background-color: white;
+    cursor: pointer;
+}

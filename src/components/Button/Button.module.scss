@@ -62,8 +62,23 @@
     background-color: white;
 }
 
-// ===== Disabled: =====
+.menu {
+    width: 100%;
+    min-height: 42px;
+    font-size: 16px;
+    font-weight: 500;
+    margin-left: 0;
+    padding-left: 16px;
+    display: flex;
+    align-items: center;
+    background-color: white;
 
+    &:hover {
+        background-color: rgba(22, 24, 35, 0.03);
+    }
+}
+
+// ===== Disabled: =====
 .disabled {
     pointer-events: none;
     opacity: 0.5;
