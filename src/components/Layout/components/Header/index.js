@@ -26,6 +26,7 @@ import {
     faCircleQuestion,
     faKeyboard,
     faMoon,
+    faCloudUpload,
 } from '@fortawesome/free-solid-svg-icons';
 import Menu from '~/components/Popper/Menu';
 
@@ -87,6 +88,9 @@ function Header() {
         console.log(menuItem);
     };
 
+    // User Login (boolean)
+    const currentUser = true;
+
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -128,17 +132,27 @@ function Header() {
 
                 {/* Actions */}
                 <div className={cx('actions')}>
-                    <Button normal>
-                        <FontAwesomeIcon icon={faPlus} />
-                        <span>Upload</span>
-                    </Button>
-                    <Button primary>Log in</Button>
+                    {currentUser ? (
+                        <>
+                            <button>
+                                <FontAwesomeIcon icon={faCloudUpload} />
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <Button normal>
+                                <FontAwesomeIcon icon={faPlus} />
+                                <span>Upload</span>
+                            </Button>
+                            <Button primary>Log in</Button>
 
-                    <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
-                        <button className={cx('more-btn')}>
-                            <FontAwesomeIcon icon={faEllipsisVertical} />
-                        </button>
-                    </Menu>
+                            <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
+                                <button className={cx('more-btn')}>
+                                    <FontAwesomeIcon icon={faEllipsisVertical} />
+                                </button>
+                            </Menu>
+                        </>
+                    )}
                 </div>
             </div>
         </header>
