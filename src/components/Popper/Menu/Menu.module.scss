@@ -3,9 +3,13 @@
     width: 224px;
 
     // MENU ITEMS
-    .menu-item {
+    &.menu-item {
         margin-left: 0;
         width: 100%;
+
+        &.separate {
+            border-top: 1px solid #464646;
+        }
     }
 }
 
