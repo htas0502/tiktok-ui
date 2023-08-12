@@ -5,6 +5,7 @@ import styles from './Header.module.scss';
 import images from '~/assets/images';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import Button from '~/components/Button';
+import Image from '~/components/Image';
 import AccountItem from '~/components/AccountItems';
 
 // React
@@ -197,7 +198,7 @@ function Header() {
                     <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
                         {currentUser ? (
                             <div className={cx('user-avatar')}>
-                                <img
+                                <Image
                                     src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/42a81079b5885e152707b170d63ba2df~c5_100x100.jpeg?x-expires=1691917200&x-signature=JdXRhLPK19Hm1PVwTpPswoksr2w%3D"
                                     alt="User Avatar!"
                                 />
