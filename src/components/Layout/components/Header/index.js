@@ -3,25 +3,19 @@
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 import images from '~/assets/images';
-import { Wrapper as PopperWrapper } from '~/components/Popper';
 import Button from '~/components/Button';
 import Image from '~/components/Image';
-import AccountItem from '~/components/AccountItems';
 
 // React
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 
 // Tippy
 // import 'tippy.js/dist/tippy.css'; // optional
 import Tippy from '@tippyjs/react';
-import HeadlessTippy from '@tippyjs/react/headless';
 
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-    faCircleXmark,
-    faSpinner,
-    faMagnifyingGlass,
     faEllipsisVertical,
     faPlus,
     faEarthAmericas,
@@ -36,7 +30,9 @@ import {
     faGear,
     faSignOut,
 } from '@fortawesome/free-solid-svg-icons';
+
 import Menu from '~/components/Popper/Menu';
+import Search from '../Search';
 
 const cx = classNames.bind(styles);
 // Thằng classNames.bind này sẽ giúp bind cái styles này vào, rồi nó sẽ trả ra 1 function tên là cx.
@@ -82,17 +78,8 @@ const MENU_ITEMS = [
 console.log(images.logo);
 
 function Header() {
-    // Logic
-    const [searchResult, setSearchResult] = useState([]);
-
     // User Login (boolean)
     const currentUser = true;
-
-    useEffect(() => {
-        setTimeout(() => {
-            setSearchResult([]);
-        }, 0);
-    }, []);
 
     // Handle Logic
     const handleMenuChange = (menuItem) => {
@@ -138,36 +125,8 @@ function Header() {
                     <img src={images.logo} alt="tiktok-logo" />
                 </div>
 
-                {/* Search */}
-                <HeadlessTippy
-                    interactive="true"
-                    visible={searchResult.length > 0}
-                    render={(attrs) => (
-                        <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                            <PopperWrapper>
-                                <h4 className={cx('search-title')}>Accounts</h4>
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                            </PopperWrapper>
-                        </div>
-                    )}
-                >
-                    <div className={cx('search')}>
-                        <input placeholder="Search..." spellCheck={false} />
-                        <button className={cx('clear-btn')}>
-                            <FontAwesomeIcon icon={faCircleXmark} />
-                        </button>
-                        <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />
-
-                        <span />
-
-                        <button className={cx('search-btn')}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        </button>
-                    </div>
-                </HeadlessTippy>
+                {/* SEARCH... */}
+                <Search />
 
                 {/* Actions */}
                 <div className={cx('actions')}>
