@@ -5,6 +5,7 @@ import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark, faMagnifyingGlass, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState, useRef } from 'react';
+import { useDebounce } from '~/hooks';
 import styles from './Search.module.scss';
 
 const cx = classNames.bind(styles);
@@ -18,16 +19,18 @@ function Search() {
 
     const inputRef = useRef();
 
+    const debounced = useDebounce(searchValue, 700);
+
     useEffect(() => {
         // .trim de khi nhap dau cach ngay dau o Search, dau cach se bi trim (cat di), khi do App se khong loi.
-        if (!searchValue.trim()) {
+        if (!debounced.trim()) {
             setSearchResult([]);
             return;
         }
 
         setLoading(true);
 
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`) // encodeURIComponent dung de ma hoa ky tu hop le de khong pham loi ky tu tren Web.
+        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`) // encodeURIComponent dung de ma hoa ky tu hop le de khong pham loi ky tu tren Web.
             .then((res) => res.json())
             .then((res) => {
                 setSearchResult(res.data);
@@ -36,7 +39,7 @@ function Search() {
             .catch(() => {
                 setLoading(false);
             });
-    }, [searchValue]);
+    }, [debounced]);
 
     const handleClear = () => {
         setSearchResult([]);
