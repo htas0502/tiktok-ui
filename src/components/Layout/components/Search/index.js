@@ -75,6 +75,14 @@ function Search() {
         setShowResult(false);
     };
 
+    const handleInputChange = (e) => {
+        const newSearchValue = e.target.value;
+
+        if (!newSearchValue.startsWith(' ')) {
+            setSearchValue(newSearchValue);
+        }
+    };
+
     return (
         <HeadlessTippy
             interactive="true"
@@ -97,7 +105,7 @@ function Search() {
                     value={searchValue}
                     placeholder="Search..."
                     spellCheck={false}
-                    onChange={(e) => setSearchValue(e.target.value)}
+                    onChange={handleInputChange}
                     onFocus={() => setShowResult(true)}
                 />
 

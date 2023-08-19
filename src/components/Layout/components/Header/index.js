@@ -5,8 +5,10 @@ import styles from './Header.module.scss';
 import images from '~/assets/images';
 import Button from '~/components/Button';
 import Image from '~/components/Image';
+import routesConfig from '~/config/routes';
 
 // React
+import { Link } from 'react-router-dom';
 // import { useEffect, useState } from 'react';
 
 // Tippy
@@ -62,7 +64,7 @@ const MENU_ITEMS = [
     {
         icon: <FontAwesomeIcon icon={faCircleQuestion} />,
         title: 'Feedback and help',
-        to: '/feedback',
+        to: routesConfig.feedback,
     },
     {
         icon: <FontAwesomeIcon icon={faKeyboard} />,
@@ -96,23 +98,23 @@ function Header() {
         {
             icon: <FontAwesomeIcon icon={faBookBookmark} />,
             title: 'Favorite',
-            to: '/favorite',
+            to: routesConfig.favorite,
         },
         {
             icon: <FontAwesomeIcon icon={faCoins} />,
             title: 'Get Coins',
-            to: '/coins',
+            to: routesConfig.coins,
         },
         {
             icon: <FontAwesomeIcon icon={faGear} />,
             title: 'Settings',
-            to: '/settings',
+            to: routesConfig.settings,
         },
         ...MENU_ITEMS,
         {
             icon: <FontAwesomeIcon icon={faSignOut} />,
             title: 'Log Out',
-            to: '/',
+            to: routesConfig.home,
             separate: true,
         },
     ];
@@ -121,9 +123,9 @@ function Header() {
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
                 {/* Logo */}
-                <div className={cx('logo')}>
+                <Link to={routesConfig.home} className={cx('logo')}>
                     <img src={images.logo} alt="tiktok-logo" />
-                </div>
+                </Link>
 
                 {/* SEARCH... */}
                 <Search />
