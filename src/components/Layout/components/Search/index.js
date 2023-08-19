@@ -2,10 +2,14 @@ import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountItem from '~/components/AccountItems';
 import HeadlessTippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
+// import axios from 'axios';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark, faMagnifyingGlass, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState, useRef } from 'react';
 import { useDebounce } from '~/hooks';
+// import * as request from '~/utils/request';      // searchServices.js
+import * as searchService from '~/apiServices/searchServices';
 import styles from './Search.module.scss';
 
 const cx = classNames.bind(styles);
@@ -28,17 +32,37 @@ function Search() {
             return;
         }
 
-        setLoading(true);
+        const fetchApi = async () => {
+            setLoading(true);
 
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`) // encodeURIComponent dung de ma hoa ky tu hop le de khong pham loi ky tu tren Web.
-            .then((res) => res.json())
-            .then((res) => {
-                setSearchResult(res.data);
-                setLoading(false);
-            })
-            .catch(() => {
-                setLoading(false);
-            });
+            const result = await searchService.search(debounced);
+            setSearchResult(result);
+
+            setLoading(false);
+        };
+        fetchApi();
+
+        // const fetchApi = async () => {
+        //     try {
+        //         const res = await request.get('users/search', {
+        //             params: {
+        //                 q: debounced,
+        //                 type: 'less',
+        //             },
+        //             // Thay vi viet "... ?q=${encodeURIComponent(debounced)}&type=less" thi thay no bang cai Obj o tren.
+        //             //
+        //         }); // encodeURIComponent dung de ma hoa ky tu hop le de khong pham loi ky tu tren Web.
+        //         // .then((res) => res.json())       // Da co Axios roi thi khong can phai code dong nay nua!
+
+        //         // console.log(res.data.data);  // Test
+        //         setSearchResult(res.data);
+        //         setLoading(false);
+        //     } catch (error) {
+        //         setLoading(false);
+        //     }
+        // };
+
+        // fetchApi();
     }, [debounced]);
 
     const handleClear = () => {
