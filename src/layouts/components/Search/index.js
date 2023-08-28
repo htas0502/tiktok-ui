@@ -9,7 +9,7 @@ import { faCircleXmark, faMagnifyingGlass, faSpinner } from '@fortawesome/free-s
 import { useEffect, useState, useRef } from 'react';
 import { useDebounce } from '~/hooks';
 // import * as request from '~/utils/request';      // searchServices.js
-import * as searchService from '~/apiServices/searchServices';
+import * as searchService from '~/services/searchServices';
 import styles from './Search.module.scss';
 
 const cx = classNames.bind(styles);

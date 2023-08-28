@@ -1,8 +1,9 @@
 // Layouts
-import { HeaderOnly } from '~/components/Layout';
+import { HeaderOnly } from '~/layouts';
 
 // Configured Routes
-import routesConfig from '~/config/routes';
+// import routesConfig from '~/config/routes';
+import config from '~/config'; // Thay vi import nhu o tren, ta nhet thang routes vaof trong 1 file ten config.js roi export no ra. Vi sau nay co the se co nhieu config va routes khac nhau... Nen la nhet het vao trong thang config.js cho no de lay!
 
 import Home from '~/pages/Home';
 import Following from '~/pages/Following';
@@ -13,12 +14,12 @@ import Search from '~/pages/Search';
 
 // Public Routes
 const publicRoutes = [
-    { path: routesConfig.home, component: Home },
-    { path: routesConfig.following, component: Following },
-    { path: routesConfig.feedback, component: Feedback },
-    { path: routesConfig.profile, component: Profile }, // trong cái path thì thay vì viết '/@:nickname' thì bỏ cái '@' đi... Vì từ react-router-dom 6.6.0 pattern chứa @ sẽ không còn dùng được nữa.
-    { path: routesConfig.search, component: Search, layout: null },
-    { path: routesConfig.upload, component: Upload, layout: HeaderOnly },
+    { path: config.routes.home, component: Home },
+    { path: config.routes.following, component: Following },
+    { path: config.routes.feedback, component: Feedback },
+    { path: config.routes.profile, component: Profile }, // trong cái path thì thay vì viết '/@:nickname' thì bỏ cái '@' đi... Vì từ react-router-dom 6.6.0 pattern chứa @ sẽ không còn dùng được nữa.
+    { path: config.routes.search, component: Search, layout: null },
+    { path: config.routes.upload, component: Upload, layout: HeaderOnly },
 ];
 
 // Private Routes
