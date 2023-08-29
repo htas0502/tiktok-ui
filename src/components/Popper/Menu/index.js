@@ -5,12 +5,13 @@ import styles from './Menu.module.scss';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import Header from './Header';
 import MenuItem from './MenuItem';
+import PropTypes from 'prop-types';
 
 const cx = classNames.bind(styles);
 
 const defaultFn = () => {};
 
-function Menu({ children, items = [], onChange = defaultFn }) {
+function Menu({ children, items = [], hideOnClick = false, onChange = defaultFn }) {
     const [history, setHistory] = useState([{ data: items }]); // history vốn dĩ là 1 cái mảng vì initState để là []
     const current = history[history.length - 1]; // Luôn lấy phần tử cuối mảng!
 
@@ -47,7 +48,7 @@ function Menu({ children, items = [], onChange = defaultFn }) {
             render={(attrs) => (
                 <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
                     <PopperWrapper className={cx('menu-popper')}>
-                        {history.length > 1 && <Header title="Language" onBack={handleBack} />}
+                        {history.length > 1 && <Header title={current.title} onBack={handleBack} />}
                         <div className={cx('menu-body')}>{renderItems()}</div>
                     </PopperWrapper>
                 </div>
@@ -58,5 +59,12 @@ function Menu({ children, items = [], onChange = defaultFn }) {
         </Tippy>
     );
 }
+
+Menu.propTypes = {
+    children: PropTypes.node.isRequired,
+    items: PropTypes.array,
+    onChange: PropTypes.bool,
+    hideOnClick: PropTypes.func,
+};
 
 export default Menu;
